@@ -1,31 +1,39 @@
-import React from 'react';
-import heroImg from '../assets/img.png';
+import React from "react";
 
+// This is the Hero section of the webpage — it's usually the top part with main heading and CTA buttons
 const Hero = () => {
   return (
-    <section className="w-full px-6 py-20 md:py-28 bg-black text-white">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-        
-        {/* Text first in all views */}
-        <div className="w-full md:w-1/2 text-center md:text-left order-2 md:order-1">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
-            Build Your Portfolio Like a Pro
-          </h1>
-          <p className="text-lg md:text-xl text-gray-300 mb-6">
-            Showcase your work, skills, and passion in one place.
-          </p>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-lg transition">
+    <section
+      id="home" // This gives the section an ID so we can scroll to it from navbar links
+      className="relative z-0 w-full px-8 pt-24 pb-20 bg-black text-white overflow-hidden"
+    >
+      {/* Purple glowing gradient added at the bottom to make the section visually appealing */}
+      <div className="absolute bottom-[-120px] left-1/2 transform -translate-x-1/2 w-[900px] h-[300px] bg-gradient-to-r from-purple-500 via-purple-700 to-purple-500 opacity-30 rounded-full blur-[120px] z-0" />
+
+      {/* Actual content of the hero section */}
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center text-center">
+        {/* Main heading */}
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+          Your complete platform for the web.
+        </h1>
+
+        {/* Sub-heading / paragraph below the main heading */}
+        <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl">
+          Vercel provides the developer tools and cloud infrastructure to build,
+          scale, and secure a faster, more personalized web.
+        </p>
+
+        {/* Two action buttons (like call-to-action) */}
+        <div className="flex flex-wrap gap-4 justify-center">
+          {/* First button - usually for starting or signup */}
+          <button className="px-6 py-3 backdrop-blur-xl bg-white/10 hover:bg-white/20 rounded-full text-white text-lg transition border border-white/20">
             Get Started
           </button>
-        </div>
 
-        {/* Image second in all views (mobile below text) */}
-        <div className="w-full md:w-1/2 flex justify-center order-1 md:order-2">
-          <img
-            src={heroImg}
-            alt="Hero"
-            className="w-full max-w-[500px] md:max-w-[700px] drop-shadow-xl"
-          />
+          {/* Second button - explore more features */}
+          <button className="px-6 py-3 backdrop-blur-xl bg-white/10 hover:bg-white/20 rounded-full text-white text-lg transition border border-white/20">
+            Explore More
+          </button>
         </div>
       </div>
     </section>

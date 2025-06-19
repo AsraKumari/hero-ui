@@ -1,14 +1,16 @@
+import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import "./index.css";
+import Pricing from "./components/Pricing";
 
-function App() {
+const App = () => {
   return (
-    <main className="bg-[#0f0f0f] min-h-screen text-white font-sans">
+    <div className="scroll-smooth">
       <Navbar />
       <Hero />
-    </main>
+      <Pricing />
+    </div>
   );
-}
+};
 
 export default App;
