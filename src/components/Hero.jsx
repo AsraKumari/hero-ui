@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section
       id="home" // This gives the section an ID so we can scroll to it from navbar links
-      className="relative z-0 w-full px-8 pt-24 pb-20 bg-black text-white overflow-hidden"
+      className="relative z-0 w-full px-8 pt-32 pb-20 bg-black text-white overflow-hidden"
     >
       {/* Purple glowing gradient added at the bottom to make the section visually appealing */}
       <div className="absolute bottom-[-120px] left-1/2 transform -translate-x-1/2 w-[900px] h-[300px] bg-gradient-to-r from-purple-500 via-purple-700 to-purple-500 opacity-30 rounded-full blur-[120px] z-0" />
