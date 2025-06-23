@@ -1,17 +1,29 @@
-import React from "react";
+// src/App.jsx
+
+import { Routes, Route, Navigate } from "react-router-dom"; // Added Navigate for fallback redirect
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Pricing from "./components/Pricing";
-import Feature from "./components/Feature";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import './index.css';
 
 const App = () => {
   return (
-    <div className="scroll-smooth">
+    <>
+      {/* This is the top navigation bar, visible on all pages */}
       <Navbar />
-      <Hero />
-      <Pricing />
-      <Feature />
-    </div>
+
+      {/* Define the main routes of the website */}
+      <Routes>
+        {/* Show Home page when user visits "/" */}
+        <Route path="/" element={<Home />} />
+
+        {/* Show About page when user visits "/about" */}
+        <Route path="/about" element={<About />} />
+
+        {/* Redirect any unknown routes to Home page */}
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </>
   );
 };
 
