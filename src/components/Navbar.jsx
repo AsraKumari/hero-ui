@@ -39,6 +39,7 @@ const navItems = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [activeMobileDropdown, setActiveMobileDropdown] = useState(null);
   const dropdownRef = useRef(null);
 
   const location = useLocation();
@@ -47,6 +48,10 @@ const Navbar = () => {
 
   const toggleDropdown = (label) => {
     setActiveDropdown(activeDropdown === label ? null : label);
+  };
+
+  const toggleMobileDropdown = (label) => {
+    setActiveMobileDropdown(activeMobileDropdown === label ? null : label);
   };
 
   const handleScrollToSection = (id) => {
@@ -64,7 +69,7 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
-  // Close dropdown on outside click
+  // Close desktop dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -128,7 +133,7 @@ const Navbar = () => {
                   </span>
                 )}
 
-                {/* Dropdown */}
+                {/* Desktop Dropdown */}
                 {item.subItems && activeDropdown === item.label && (
                   <div className="absolute top-full left-0 mt-2 bg-white/10 backdrop-blur-lg text-white rounded-md p-3 min-w-[160px] space-y-2 shadow-lg z-50">
                     {item.subItems.map((sub, index) =>
@@ -205,19 +210,19 @@ const Navbar = () => {
               ) : (
                 <>
                   <div
-                    onClick={() => toggleDropdown(item.label)}
+                    onClick={() => toggleMobileDropdown(item.label)}
                     className="flex justify-between items-center py-2 font-semibold cursor-pointer"
                   >
                     <span>{item.label}</span>
                     <ChevronDown
                       size={18}
                       className={`transition-transform ${
-                        activeDropdown === item.label ? "rotate-180" : ""
+                        activeMobileDropdown === item.label ? "rotate-180" : ""
                       }`}
                     />
                   </div>
 
-                  {item.subItems && activeDropdown === item.label && (
+                  {item.subItems && activeMobileDropdown === item.label && (
                     <div className="pl-4 mt-1 space-y-1 text-sm text-gray-300">
                       {item.subItems.map((sub, index) =>
                         sub.link.startsWith("/") ? (
