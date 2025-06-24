@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useScroll } from "../ScrollToSectionContext"; // Import the scroll context
+import { useScroll } from "../ScrollToSectionContext";
 
-// Define all the nav items and their links or submenus
+// Navigation items
 const navItems = [
   { label: "Home", link: "/" },
   { label: "Pricing", link: "#pricing" },
@@ -39,28 +39,44 @@ const navItems = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const dropdownRef = useRef(null);
 
   const location = useLocation();
   const navigate = useNavigate();
   const { setSectionToScroll } = useScroll();
 
-  // Function to toggle dropdown open/close
   const toggleDropdown = (label) => {
     setActiveDropdown(activeDropdown === label ? null : label);
   };
 
-  // Function to scroll or redirect + scroll
   const handleScrollToSection = (id) => {
     if (location.pathname !== "/") {
-      setSectionToScroll(id); // Save section to scroll after redirect
-      navigate("/"); // Go to homepage
+      setSectionToScroll(id);
+      navigate("/");
     } else {
-      const section = document.querySelector(id); // Find the element
-      if (section) section.scrollIntoView({ behavior: "smooth" }); // Scroll
+      const section = document.querySelector(id);
+      if (section) section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const isOnAboutPage = location.pathname === "/about";
+  const handleNavigate = (link) => {
+    handleScrollToSection(link);
+    setMobileOpen(false);
+  };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div
@@ -74,7 +90,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex flex-1 justify-center">
+        <div className="hidden md:flex flex-1 justify-center" ref={dropdownRef}>
           <ul className="flex gap-10 text-sm font-medium items-center">
             {navItems.map((item) => (
               <li
@@ -101,11 +117,18 @@ const Navbar = () => {
                 ) : (
                   <span className="flex items-center gap-1">
                     {item.label}
-                    {item.subItems && <ChevronDown size={16} className="mt-1" />}
+                    {item.subItems && (
+                      <ChevronDown
+                        size={16}
+                        className={`mt-1 transition-transform ${
+                          activeDropdown === item.label ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
                   </span>
                 )}
 
-                {/* Dropdown for subitems */}
+                {/* Dropdown */}
                 {item.subItems && activeDropdown === item.label && (
                   <div className="absolute top-full left-0 mt-2 bg-white/10 backdrop-blur-lg text-white rounded-md p-3 min-w-[160px] space-y-2 shadow-lg z-50">
                     {item.subItems.map((sub, index) =>
@@ -145,15 +168,19 @@ const Navbar = () => {
           </a>
         </div>
 
-        {/* Mobile hamburger menu */}
+        {/* Mobile menu toggle */}
         <div className="md:hidden">
-          <button onClick={() => setMobileOpen(!mobileOpen)}>
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-expanded={mobileOpen}
+            aria-label="Toggle menu"
+          >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu Items */}
+      {/* Mobile Menu */}
       {mobileOpen && (
         <div className="md:hidden px-6 space-y-4 transition-all duration-300">
           {navItems.map((item) => (
@@ -169,10 +196,7 @@ const Navbar = () => {
                   </Link>
                 ) : (
                   <span
-                    onClick={() => {
-                      handleScrollToSection(item.link);
-                      setMobileOpen(false);
-                    }}
+                    onClick={() => handleNavigate(item.link)}
                     className="block py-2 font-semibold hover:text-purple-400 transition cursor-pointer"
                   >
                     {item.label}
@@ -185,7 +209,12 @@ const Navbar = () => {
                     className="flex justify-between items-center py-2 font-semibold cursor-pointer"
                   >
                     <span>{item.label}</span>
-                    {item.subItems && <ChevronDown size={18} />}
+                    <ChevronDown
+                      size={18}
+                      className={`transition-transform ${
+                        activeDropdown === item.label ? "rotate-180" : ""
+                      }`}
+                    />
                   </div>
 
                   {item.subItems && activeDropdown === item.label && (
@@ -203,10 +232,7 @@ const Navbar = () => {
                         ) : (
                           <span
                             key={index}
-                            onClick={() => {
-                              handleScrollToSection(sub.link);
-                              setMobileOpen(false);
-                            }}
+                            onClick={() => handleNavigate(sub.link)}
                             className="block py-1 hover:text-purple-400 transition cursor-pointer"
                           >
                             {sub.label}
@@ -220,12 +246,10 @@ const Navbar = () => {
             </div>
           ))}
 
+          {/* Mobile Sign Up */}
           <div className="pt-4">
             <span
-              onClick={() => {
-                handleScrollToSection("#signup");
-                setMobileOpen(false);
-              }}
+              onClick={() => handleNavigate("#signup")}
               className="block w-full text-center py-2 bg-white/10 backdrop-blur-md text-white rounded-md font-semibold shadow-md border border-white/20 hover:bg-purple-600 transition cursor-pointer"
             >
               Sign Up

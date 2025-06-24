@@ -2,54 +2,15 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lottie from "lottie-react";
 
-// Importing all Lottie JSON icons
-import rocket from "../assets/rocket.json";
-import setting from "../assets/setting.json";
-import global from "../assets/global.json";
-import link from "../assets/link.json";
-import graph from "../assets/graph.json";
-import team from "../assets/team.json";
+// ✅ Importing from the correct data file
+import { features } from "../data/featureData";
 
-// Feature list with Lottie animations
-const features = [
-  {
-    icon: rocket,
-    title: "Fast Deployment",
-    description: "Deploy your projects instantly with zero config setup.",
-  },
-  {
-    icon: setting,
-    title: "Built-in CI/CD",
-    description: "Push your code and watch it go live automatically.",
-  },
-  {
-    icon: global,
-    title: "Global CDN",
-    description: "Serve your apps worldwide with low latency.",
-  },
-  {
-    icon: link,
-    title: "Custom Domains",
-    description: "Easily connect custom domains with SSL.",
-  },
-  {
-    icon: graph,
-    title: "Analytics",
-    description: "Track performance and engagement out of the box.",
-  },
-  {
-    icon: team,
-    title: "Team Collaboration",
-    description: "Work together with roles and permissions.",
-  },
-];
 
 const Feature = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-   <section id="feature" className="relative w-full bg-black text-white py-20 overflow-hidden">
-
+    <section id="feature" className="relative w-full bg-black text-white py-20 overflow-hidden">
       {/* Soft Purple Gradient From Top */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-64 bg-gradient-to-b from-purple-600/20 to-transparent blur-2xl z-0" />
 
@@ -78,14 +39,8 @@ const Feature = () => {
                     layoutId="glassEffect"
                     className="absolute inset-0 rounded-2xl bg-purple-500/10 border border-purple-500/20 backdrop-blur-lg"
                     initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { duration: 0.6, ease: "easeInOut" },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: { duration: 0.4, ease: "easeOut" },
-                    }}
+                    animate={{ opacity: 1, transition: { duration: 0.6, ease: "easeInOut" } }}
+                    exit={{ opacity: 0, transition: { duration: 0.4, ease: "easeOut" } }}
                   />
                 )}
               </AnimatePresence>

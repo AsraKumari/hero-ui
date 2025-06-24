@@ -15,12 +15,17 @@ export default defineConfig({
 
         try {
           fs.copyFileSync(indexPath, notFoundPath);
-          console.log('✅ 404.html created successfully in dist/');
+          console.log('404.html created successfully in dist/');
         } catch (err) {
-          console.error('❌ Error copying index.html to 404.html:', err);
+          console.error('Error copying index.html to 404.html:', err);
         }
       },
     },
   ],
-  base: '/hero-ui/', 
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'), 
+    },
+  },
+  base: '/hero-ui/',
 });

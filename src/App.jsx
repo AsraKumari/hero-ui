@@ -1,27 +1,23 @@
-// src/App.jsx
-
-import { Routes, Route, Navigate } from "react-router-dom"; // Added Navigate for fallback redirect
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import NotFound from "./pages/NotFound"; // Importing the custom 404 page
 import './index.css';
 
 const App = () => {
   return (
     <>
-      {/* This is the top navigation bar, visible on all pages */}
+      {/* Navbar shown on all pages */}
       <Navbar />
 
-      {/* Define the main routes of the website */}
+      {/* Main route definitions */}
       <Routes>
-        {/* Show Home page when user visits "/" */}
         <Route path="/" element={<Home />} />
-
-        {/* Show About page when user visits "/about" */}
         <Route path="/about" element={<About />} />
 
-        {/* Redirect any unknown routes to Home page */}
-        <Route path="*" element={<Navigate to="/" />} />
+        {/* Show custom 404 page for all undefined routes */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

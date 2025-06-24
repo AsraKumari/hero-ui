@@ -1,45 +1,7 @@
-import React from "react";
+// src/components/Pricing.jsx
 
-const pricingPlans = [
-  {
-    title: "Free",
-    price: "$0.00",
-    button: "Start for Free",
-    features: [
-      "Account Aggregation",
-      "Expense Tracking",
-      "Budgeting Tools",
-      "Transaction Insights",
-      "Basic Security",
-    ],
-  },
-  {
-    title: "Professional",
-    price: "$98.00",
-    tag: "Most Popular",
-    button: "Sign Up with Professional",
-    highlight: true,
-    features: [
-      "Everything in Free",
-      "Customizable Dashboards",
-      "Advanced Budgeting",
-      "Investment Tracking",
-      "Enhanced Security",
-    ],
-  },
-  {
-    title: "Enterprise",
-    price: "$160.00",
-    button: "Sign Up with Enterprise",
-    features: [
-      "Financial Planning Tools",
-      "Priority Support",
-      "Premium Widgets",
-      "Advanced Security",
-      "Integration with 3rd-Party Services",
-    ],
-  },
-];
+import React from "react";
+import { pricingPlans } from "../data/pricingData";
 
 const Pricing = () => {
   return (
@@ -56,9 +18,9 @@ const Pricing = () => {
 
       {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {pricingPlans.map((plan, index) => (
+        {pricingPlans.map((plan) => (
           <div
-            key={index}
+            key={plan.id}
             className={`relative group p-6 rounded-2xl backdrop-blur-lg border border-white/10 bg-white/5 transition-all overflow-hidden shadow-lg hover:shadow-2xl ${
               plan.highlight ? "ring-2 ring-purple-400" : ""
             }`}
@@ -82,11 +44,11 @@ const Pricing = () => {
               <span className="text-sm font-medium text-gray-400">/month</span>
             </p>
 
-            {/* Button Styling */}
+            {/* Button */}
             <button
               className={`w-full py-2 rounded-full font-medium transition duration-300 ${
                 plan.highlight
-                  ? "bg-orange-500 text-white" // Keep orange for highlighted (Professional)
+                  ? "bg-orange-500 text-white"
                   : "bg-white/10 text-white border border-white/20 hover:bg-gradient-to-r hover:from-purple-500 hover:to-purple-700"
               }`}
             >
@@ -99,8 +61,8 @@ const Pricing = () => {
                 Features
               </p>
               <ul className="space-y-2 text-sm">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2">
+                {plan.features.map((feature, index) => (
+                  <li key={index} className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-green-400 rounded-full"></span>
                     {feature}
                   </li>
