@@ -1,16 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Redirecting...</title>
+    <link rel="icon" type="image/svg+xml" href="/hero-ui/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      const redirectPath = location.pathname.replace('/hero-ui', '') + location.search + location.hash;
-      sessionStorage.setItem('redirectPath', redirectPath);
-      location.href = '/hero-ui/';
-    </script>
+    <title>Vite + React</title>
+    <!-- In public/index.html -->
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    
+    <script type="module" crossorigin src="/hero-ui/assets/index-yQArfQdp.js"></script>
   </head>
-  <body style="background: #000; color: white; font-family: sans-serif;">
-    Redirecting...
+  <body>
+    <div id="root"></div>
+    <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-500 tracking-wide">
+  
+</div>
+
   </body>
 </html>
