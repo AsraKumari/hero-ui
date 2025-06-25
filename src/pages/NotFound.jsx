@@ -1,17 +1,17 @@
-import React from "react";
-import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import NotFoundImg from "../assets/404.svg";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-[#0a0a15] text-white p-4">
-      <h1 className="text-5xl font-bold mb-4">404</h1>
-      <p className="text-lg mb-6">Oops! The page you are looking for does not exist.</p>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white text-center px-6">
+      <img src={NotFoundImg} alt="404" className="max-w-xs mb-6" />
+      <h1 className="text-4xl font-bold mb-2">Page Not Found</h1>
+      <p className="text-gray-400 mb-4">Sorry, the page you requested doesn’t exist.</p>
       <Link
         to="/"
-        className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 transition rounded-md text-white"
+        className="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded transition"
       >
-        <FaArrowLeft /> Go Back Home
+        Go to Home
       </Link>
     </div>
   );

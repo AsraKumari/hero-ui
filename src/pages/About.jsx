@@ -1,6 +1,8 @@
 import React from "react";
 import Timeline from "../components/Timeline";
 import TeamSection from "../components/TeamSection";
+import OurValuesSection from "../components/OurValuesSection"; 
+import { valuesData } from "../data/valuesData"; 
 
 const About = () => {
   return (
@@ -21,6 +23,7 @@ const About = () => {
       <section>
         <Timeline />
         <TeamSection />
+        <OurValuesSection items={valuesData} /> 
       </section>
     </main>
   );
