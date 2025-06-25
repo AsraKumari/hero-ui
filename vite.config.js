@@ -3,10 +3,11 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import fs from 'fs';
 
-const isGitHub = process.env.VERCEL !== '1';
+
+const isVercel = process.env.VERCEL === '1';
 
 export default defineConfig({
-  base: isGitHub ? '/hero-ui/' : '/', // ✅ conditionally set base
+  base: isVercel ? '/' : '/hero-ui/',
   plugins: [
     react(),
     {
