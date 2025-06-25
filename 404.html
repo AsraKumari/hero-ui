@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Save path and redirect to index.html with correct route
+      const redirectPath = window.location.pathname.replace('/hero-ui', '') + window.location.search;
+      sessionStorage.setItem('redirect', redirectPath);
+      window.location.replace('/hero-ui/');
+    </script>
+  </head>
+  <body style="background-color: #000; color: white; font-family: sans-serif;">
+    <p>Redirecting...</p>
+  </body>
+</html>
