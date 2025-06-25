@@ -4,7 +4,7 @@ import path from 'path';
 import fs from 'fs';
 
 export default defineConfig({
-  //base: '/hero-ui/', // for GitHub Pages
+  base: '/', // for GitHub Pages
   plugins: [
     react(),
     {

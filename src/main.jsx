@@ -7,7 +7,7 @@ import "./index.css"; //Tailwind entry point
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter basename="/hero-ui">
+    <BrowserRouter>
       <ScrollProvider>
         <App />
       </ScrollProvider>
