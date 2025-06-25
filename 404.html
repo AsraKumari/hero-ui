@@ -5,13 +5,12 @@
     <title>Redirecting...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Save path and redirect to index.html with correct route
-      const redirectPath = window.location.pathname.replace('/hero-ui', '') + window.location.search;
-      sessionStorage.setItem('redirect', redirectPath);
-      window.location.replace('/hero-ui/');
+      const redirectPath = location.pathname.replace('/hero-ui', '') + location.search + location.hash;
+      sessionStorage.setItem('redirectPath', redirectPath);
+      location.href = '/hero-ui/';
     </script>
   </head>
-  <body style="background-color: #000; color: white; font-family: sans-serif;">
-    <p>Redirecting...</p>
+  <body style="background: #000; color: white; font-family: sans-serif;">
+    Redirecting...
   </body>
 </html>
