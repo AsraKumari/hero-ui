@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lottie from "lottie-react";
 
-// ✅ Importing from the correct data file
+// Importing from the data file
 import { features } from "../data/featureData";
 
 
