@@ -5,29 +5,56 @@ import Lottie from "lottie-react";
 // Importing from the data file
 import { features } from "../data/featureData";
 
-
 const Feature = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
     <section id="feature" className="relative w-full bg-black text-white py-20 overflow-hidden">
-      {/* Soft Purple Gradient From Top */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-64 bg-gradient-to-b from-purple-600/20 to-transparent blur-2xl z-0" />
+      {/* Gradient Top Left */}
+      <div className="absolute top-[-80px] left-[-100px] w-[600px] h-[400px] bg-gradient-to-bl from-purple-600 via-pink-500 to-indigo-600 opacity-25 blur-[120px] rounded-full z-0 -rotate-45" />
+
+      {/* Gradient Bottom Right */}
+      <div className="absolute bottom-[-80px] right-[-100px] w-[600px] h-[400px] bg-gradient-to-tr from-pink-500 via-purple-600 to-indigo-600 opacity-25 blur-[120px] rounded-full z-0 rotate-45" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Section Heading */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">Core Features</h2>
+        {/* Section Heading with Highlight */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+            Powerful <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">Core Features</span>
+          </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Discover the powerful features that make our platform fast, reliable, and scalable.
+            Unlock the power of seamless performance, futuristic design, and secure technology that evolves with your needs.
           </p>
-        </div>
+        </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15
+              }
+            }
+          }}
+          viewport={{ once: true, amount: 0.6 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {features.map((feature, idx) => (
-            <div
+            <motion.div
               key={idx}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+              }}
               className="relative group p-1"
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -53,9 +80,9 @@ const Feature = () => {
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-400 text-sm">{feature.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

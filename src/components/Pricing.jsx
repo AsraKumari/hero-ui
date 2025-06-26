@@ -1,26 +1,38 @@
-// src/components/Pricing.jsx
-
 import React from "react";
 import { pricingPlans } from "../data/pricingData";
+import { motion } from "framer-motion";
 
 const Pricing = () => {
   return (
-    <section id="pricing" className="w-full bg-black text-white py-20 px-6">
+    <section
+      id="pricing"
+      className="w-full bg-black text-white py-20 px-6 relative overflow-hidden"
+    >
       {/* Header */}
-      <div className="max-w-7xl mx-auto text-center mb-16">
-        <h2 className="text-4xl font-bold mb-4">
-          Simple and Affordable Pricing Plans
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto text-center mb-16 relative z-10"
+      >
+        <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+          Simple and <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">Affordable Pricing</span> Plans
         </h2>
-        <p className="text-gray-400">
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
           Start tracking and improving your finance management
         </p>
-      </div>
+      </motion.div>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        {pricingPlans.map((plan) => (
-          <div
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-10">
+        {pricingPlans.map((plan, index) => (
+          <motion.div
             key={plan.id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            viewport={{ once: true, amount: 0.8 }}
             className={`relative group p-6 rounded-2xl backdrop-blur-lg border border-white/10 bg-white/5 transition-all overflow-hidden shadow-lg hover:shadow-2xl ${
               plan.highlight ? "ring-2 ring-purple-400" : ""
             }`}
@@ -69,7 +81,7 @@ const Pricing = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -4,13 +4,7 @@ import { SiTailwindcss } from "react-icons/si";
 import { PiStudentDuotone } from "react-icons/pi";
 
 const timelineData = [
-  {
-    date: "2023",
-    title: "Started Learning Frontend",
-    description:
-      "I began exploring HTML, CSS, and JavaScript out of curiosity. What started as a side hobby quickly turned into a serious passion. I spent hours practicing the basics, building simple web pages, and understanding how the browser works.",
-    icon: <PiStudentDuotone size={24} />,
-  },
+  
   {
     date: "June 2024",
     title: "Learnt React & Tailwind",
