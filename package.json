@@ -12,6 +12,7 @@
   },
   "homepage": "https://asrakumari.github.io/hero-ui",
   "dependencies": {
+    "@babel/runtime": "^7.27.6",
     "clsx": "^2.1.1",
     "framer-motion": "^12.18.1",
     "lottie-react": "^2.4.1",
