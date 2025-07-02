@@ -14,6 +14,7 @@
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "clsx": "^2.1.1",
+    "core-js-pure": "^3.43.0",
     "framer-motion": "^12.18.1",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.516.0",
