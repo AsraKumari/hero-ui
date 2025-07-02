@@ -1,16 +1,17 @@
+// Navbar.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useScroll } from "../ScrollToSectionContext";
 
-// Navigation items
+// ✅ Updated only this part ↓
 const navItems = [
   { label: "Home", link: "/" },
   { label: "Pricing", link: "#pricing" },
   {
     label: "Product",
     subItems: [
-      { label: "Overview", link: "#" },
+      { label: "Overview", link: "/overview" }, // ✅ updated link here
       { label: "Feature", link: "#feature" },
       { label: "Integrations", link: "#" },
     ],
@@ -69,7 +70,6 @@ const Navbar = () => {
     setMobileOpen(false);
   };
 
-  // Close desktop dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (

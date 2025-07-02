@@ -4,18 +4,26 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
+        outfit: ['Outfit', 'sans-serif'], // ✅ Clean modern font
       },
       keyframes: {
-        cardShine: {
-          "0%": { transform: "translateX(-100%) rotate(-12deg) scale(1.5)" },
-          "100%": { transform: "translateX(200%) rotate(-12deg) scale(1.5)" },
+        // ✨ Fade in keyframes
+        fadeIn: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
+        fadeInUp: {
+          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
         },
       },
       animation: {
-        cardShine: "cardShine 1.4s ease-in-out forwards",
+        fade: "fadeIn 1s ease-in-out forwards",
+        'fade-in-slow': "fadeIn 2s ease-out",
+        'fade-in-up': "fadeInUp 1s ease-out",
       },
       backgroundImage: {
+        // 🎨 Radial background helper (if needed)
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
     },
