@@ -17,7 +17,11 @@ const Pricing = () => {
         className="max-w-7xl mx-auto text-center mb-16 relative z-10"
       >
         <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
-          Simple and <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">Affordable Pricing</span> Plans
+          Simple and{" "}
+          <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+            Affordable Pricing
+          </span>{" "}
+          Plans
         </h2>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
           Start tracking and improving your finance management
@@ -39,7 +43,7 @@ const Pricing = () => {
           >
             {/* Shine Effect */}
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent blur-md transform -rotate-12 scale-150 translate-x-[-100%] group-hover:animate-cardShine" />
+              <div className="absolute w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent blur-sm transform -rotate-12 scale-150 translate-x-[-100%] group-hover:animate-cardShine" />
             </div>
 
             {/* Tag Badge */}
