@@ -1,15 +1,18 @@
 import { ParallaxProvider } from 'react-scroll-parallax';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { LayoutDashboard, Brush, Megaphone } from 'lucide-react';
+import useIsMobile from '../hooks/useIsMobile';
 
 import stars from '../assets/stars.png';
 import moon from '../assets/moon.png';
 import frontCliff from '../assets/mf.png';
 import mountains from '../assets/mb.png';
+import { LayoutDashboard, Brush, Megaphone } from 'lucide-react';
 
 export default function HeroSection() {
+  const isMobile = useIsMobile();
   const ref = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
@@ -22,108 +25,119 @@ export default function HeroSection() {
 
   return (
     <ParallaxProvider>
-      <>
-        {/* DESKTOP HERO */}
-        <section
-          ref={ref}
-          className="hidden lg:block relative h-screen w-full overflow-hidden bg-black text-white"
-        >
-          <img
-            src={stars}
-            alt="Stars"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
+      <div className="overflow-x-hidden">
+        {isMobile ? (
+          <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+            <motion.div
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute inset-0 overflow-hidden z-0"
+            >
+              <img
+                src={stars}
+                alt="Stars"
+                className="w-full h-full object-cover object-top"
+                style={{ maskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)' }}
+              />
+            </motion.div>
 
-          <motion.img
-            src={moon}
-            alt="Moon"
-            style={{ y: moonY }}
-            transition={{ type: 'spring', stiffness: 40, damping: 20 }}
-            className="absolute top-0 left-[45%] -translate-x-1/2 w-40 z-5"
-          />
+            <motion.img
+              src={moon}
+              alt="Moon"
+              initial={{ y: -10 }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+              className="absolute top-[6%] left-1/2 -translate-x-1/2 w-24 sm:w-28 md:w-32 z-20 object-contain"
+            />
 
-          <motion.div
-            style={{ y: headingY }}
-            transition={{ type: 'spring', stiffness: 40, damping: 20 }}
-            className="absolute top-40 left-[28%] -translate-x-1/2 w-full max-w-[600px] text-center px-6 z-15"
-          >
             <motion.h1
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-5xl md:text-6xl font-extrabold text-white"
+              transition={{ duration: 1.2 }}
+              className="absolute top-[28%] left-[10%] -translate-x-1/2 transform text-center w-[90%] px-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold z-30"
             >
               Power Your{' '}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
                 Design System
               </span>
             </motion.h1>
-          </motion.div>
 
-          <motion.img
-            src={mountains}
-            alt="Mountains"
-            style={{ y: mountainsY }}
-            transition={{ type: 'spring', stiffness: 50, damping: 25 }}
-            className="absolute bottom-[-150px] left-[20%] -translate-x-1/2 w-full max-w-7xl z-20"
-          />
+            <motion.img
+              src={mountains}
+              alt="Mountains"
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.02, 1] }}
+              transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute bottom-0 w-full h-[100vh] object-cover z-10"
+            />
 
-          <motion.img
-            src={frontCliff}
-            alt="Cliffs"
-            style={{ y: cliffsY }}
-            transition={{ type: 'spring', stiffness: 60, damping: 28 }}
-            className="absolute bottom-[-10%] left-[0%] -translate-x-1/2 w-full max-w-8xl z-30"
-          />
-        </section>
-
-        {/* MOBILE HERO SECTION */}
-        <section className="lg:hidden relative h-screen w-full overflow-hidden bg-black text-white">
-          <img
-            src={stars}
-            alt="Stars"
-            className="absolute inset-0 w-full h-full object-cover z-0"
-          />
-
-          <motion.img
-            src={moon}
-            alt="Moon"
-            initial={{ y: 0 }}
-            animate={{ y: [0, 40, 0] }}
-            transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }}
-            className="absolute top-[-260px] right-0 w-50 z-10"
-          />
-
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2 }}
-            className="absolute top-[180px] left-7 text-left text-3xl font-extrabold z-30 pr-6 leading-snug"
+            <motion.img
+              src={frontCliff}
+              alt="Cliff"
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute bottom-0 w-full h-[100vh] object-cover z-20"
+            />
+          </section>
+        ) : (
+          <section
+            ref={ref}
+            className="relative h-screen w-full overflow-hidden bg-black text-white"
           >
-            Power Your{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
-              Design System
-            </span>
-          </motion.h1>
+            <motion.img
+              src={stars}
+              alt="Stars"
+              initial={{ scale: 1 }}
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute inset-0 w-full h-full object-cover z-0"
+            />
 
-          <motion.img
-            src={mountains}
-            alt="Mountains"
-            initial={{ y: 50 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute bottom-[20px] w-full object-contain z-20 pointer-events-none"
-          />
+            <motion.img
+              src={moon}
+              alt="Moon"
+              style={{ y: moonY }}
+              transition={{ type: 'spring', stiffness: 40, damping: 20 }}
+              className="absolute top-[6%] left-1/2 -translate-x-1/2 w-32 lg:w-40 z-10 object-contain"
+            />
 
-          <motion.img
-            src={frontCliff}
-            alt="Cliff"
-            initial={{ y: 80 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1.2 }}
-            className="absolute bottom-0 w-full object-contain z-30 pointer-events-none"
-          />
-        </section>
+            <motion.div
+              style={{ y: headingY }}
+              transition={{ type: 'spring', stiffness: 40, damping: 20 }}
+              className="absolute top-40 left-[28%] -translate-x-1/2 w-full max-w-[600px] text-center px-6 z-20"
+            >
+              <motion.h1
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-5xl md:text-6xl font-extrabold text-white"
+              >
+                Power Your{' '}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+                  Design System
+                </span>
+              </motion.h1>
+            </motion.div>
+
+            <motion.img
+              src={mountains}
+              alt="Mountains"
+              style={{ y: mountainsY }}
+              transition={{ type: 'spring', stiffness: 50, damping: 25 }}
+              className="absolute bottom-[-150px] left-[20%] -translate-x-1/2 w-full max-w-7xl z-20"
+            />
+
+            <motion.img
+              src={frontCliff}
+              alt="Cliffs"
+              style={{ y: cliffsY }}
+              transition={{ type: 'spring', stiffness: 60, damping: 28 }}
+              className="absolute bottom-[-10%] left-[0%] -translate-x-1/2 w-full max-w-8xl z-30"
+            />
+          </section>
+        )}
 
         {/* Use Case Section */}
         <section className="relative z-50 w-full bg-gradient-to-b from-black via-[#120022] to-black pt-20 pb-24 px-6 md:px-16 text-white">
@@ -138,7 +152,6 @@ export default function HeroSection() {
           </div>
 
           <div className="flex flex-col md:flex-row gap-12 items-stretch justify-center">
-            {/* Card 1 */}
             <motion.div
               initial={{ opacity: 0, x: -100, rotateZ: -4 }}
               whileInView={{ opacity: 1, x: 0, rotateZ: 0 }}
@@ -158,7 +171,6 @@ export default function HeroSection() {
               </ul>
             </motion.div>
 
-            {/* Card 2 */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -177,7 +189,6 @@ export default function HeroSection() {
               </ul>
             </motion.div>
 
-            {/* Card 3 */}
             <motion.div
               initial={{ opacity: 0, x: 100, rotateZ: 4 }}
               whileInView={{ opacity: 1, x: 0, rotateZ: 0 }}
@@ -199,109 +210,105 @@ export default function HeroSection() {
         </section>
 
         {/* How It Works Section */}
-      <section className="relative z-40 bg-[#10001a]/80 backdrop-blur-xl py-32 px-6 md:px-20 text-white">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.3 }}
-            transition={{ type: 'spring', stiffness: 45, damping: 20 }}
-            className="text-4xl md:text-5xl font-extrabold mb-6 text-center"
-          >
-            Workflow & System Flow
-          </motion.h2>
-
-          {/* New paragraph added */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.7 }}
-            className="text-gray-300 max-w-2xl mx-auto text-center mb-16"
-          >
-            We’ve engineered a system that’s modular, theme-aware, and optimized for every screen. Each phase in your product lifecycle — from design to deployment — benefits from clean, reusable code architecture.
-          </motion.p>
-
-          <div className="grid md:grid-cols-3 gap-12">
-            {/* Block 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: -60, y: 40, rotateZ: -2 }}
-              whileInView={{ opacity: 1, x: 0, y: 0, rotateZ: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ type: 'spring', stiffness: 50, damping: 20 }}
-              className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-xl hover:shadow-purple-700/20 backdrop-blur-md"
+        <section className="relative z-40 bg-[#10001a]/80 backdrop-blur-xl py-32 px-6 md:px-20 text-white">
+          <div className="max-w-6xl mx-auto">
+            <motion.h2
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ type: 'spring', stiffness: 45, damping: 20 }}
+              className="text-4xl md:text-5xl font-extrabold mb-6 text-center"
             >
-              <h3 className="text-xl font-semibold mb-3">1. Componentized Structure</h3>
-              <p className="text-sm text-gray-300 mb-4">
-                Build consistent UIs with atomic components. Each element is isolated, tested, and optimized for reusability.
-              </p>
-              <ul className="text-sm text-gray-400 list-disc list-inside space-y-1">
-                <li>Atomic Design Architecture</li>
-                <li>Strict Component Contracts</li>
-                <li>Smart State Isolation</li>
-              </ul>
-            </motion.div>
+              Workflow & System Flow
+            </motion.h2>
 
-            {/* Block 2 */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
-              transition={{ type: 'spring', stiffness: 60, damping: 18 }}
-              className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-xl hover:shadow-pink-700/20 backdrop-blur-md"
+              transition={{ duration: 0.7 }}
+              className="text-gray-300 max-w-2xl mx-auto text-center mb-16"
             >
-              <h3 className="text-xl font-semibold mb-3">2. Seamless Theming</h3>
-              <p className="text-sm text-gray-300 mb-4">
-                Adapt instantly with tokenized themes. Change colors, fonts, spacing — all dynamically and globally.
-              </p>
-              <ul className="text-sm text-gray-400 list-disc list-inside space-y-1">
-                <li>Design Token System</li>
-                <li>Dark & Light Modes</li>
-                <li>Live Theme Switching</li>
-              </ul>
-            </motion.div>
+              We’ve engineered a system that’s modular, theme-aware, and optimized for every screen. Each phase in your product lifecycle — from design to deployment — benefits from clean, reusable code architecture.
+            </motion.p>
 
-            {/* Block 3 */}
-            <motion.div
-              initial={{ opacity: 0, x: 60, y: 40, rotateZ: 2 }}
-              whileInView={{ opacity: 1, x: 0, y: 0, rotateZ: 0 }}
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ type: 'spring', stiffness: 50, damping: 20 }}
-              className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-xl hover:shadow-purple-700/20 backdrop-blur-md"
-            >
-              <h3 className="text-xl font-semibold mb-3">3. Deployment Ready</h3>
-              <p className="text-sm text-gray-300 mb-4">
-                Ship with confidence. All components are production-optimized and accessible from day one.
-              </p>
-              <ul className="text-sm text-gray-400 list-disc list-inside space-y-1">
-                <li>SEO Optimized Layouts</li>
-                <li>A11y Standards Followed</li>
-                <li>Lazy Loading + Code Splitting</li>
-              </ul>
-            </motion.div>
+            <div className="grid md:grid-cols-3 gap-12">
+              <motion.div
+                initial={{ opacity: 0, x: -60, y: 40, rotateZ: -2 }}
+                whileInView={{ opacity: 1, x: 0, y: 0, rotateZ: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+                className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-xl hover:shadow-purple-700/20 backdrop-blur-md"
+              >
+                <h3 className="text-xl font-semibold mb-3">1. Componentized Structure</h3>
+                <p className="text-sm text-gray-300 mb-4">
+                  Build consistent UIs with atomic components. Each element is isolated, tested, and optimized for reusability.
+                </p>
+                <ul className="text-sm text-gray-400 list-disc list-inside space-y-1">
+                  <li>Atomic Design Architecture</li>
+                  <li>Strict Component Contracts</li>
+                  <li>Smart State Isolation</li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ type: 'spring', stiffness: 60, damping: 18 }}
+                className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-xl hover:shadow-pink-700/20 backdrop-blur-md"
+              >
+                <h3 className="text-xl font-semibold mb-3">2. Seamless Theming</h3>
+                <p className="text-sm text-gray-300 mb-4">
+                  Adapt instantly with tokenized themes. Change colors, fonts, spacing — all dynamically and globally.
+                </p>
+                <ul className="text-sm text-gray-400 list-disc list-inside space-y-1">
+                  <li>Design Token System</li>
+                  <li>Dark & Light Modes</li>
+                  <li>Live Theme Switching</li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 60, y: 40, rotateZ: 2 }}
+                whileInView={{ opacity: 1, x: 0, y: 0, rotateZ: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ type: 'spring', stiffness: 50, damping: 20 }}
+                className="bg-white/5 p-6 rounded-2xl border border-white/10 shadow-xl hover:shadow-purple-700/20 backdrop-blur-md"
+              >
+                <h3 className="text-xl font-semibold mb-3">3. Deployment Ready</h3>
+                <p className="text-sm text-gray-300 mb-4">
+                  Ship with confidence. All components are production-optimized and accessible from day one.
+                </p>
+                <ul className="text-sm text-gray-400 list-disc list-inside space-y-1">
+                  <li>SEO Optimized Layouts</li>
+                  <li>A11y Standards Followed</li>
+                  <li>Lazy Loading + Code Splitting</li>
+                </ul>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="relative z-40 bg-black text-white py-24 px-6 md:px-20">
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ type: 'spring', stiffness: 40, damping: 22 }}
-          className="max-w-5xl mx-auto text-center border border-[#222] rounded-3xl py-20 px-10 bg-gradient-to-br from-[#1a002d] via-black to-[#1a002d]"
-        >
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Let’s Build Something Incredible</h2>
-          <p className="text-lg text-gray-300 mb-10">
-            Supercharge your frontend with flexible, powerful, and production-ready components. Build faster, look sharper.
-          </p>
-          <button className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition duration-300">
-            Get Started Now
-          </button>
-        </motion.div>
-      </section>
-      </>
+        {/* CTA */}
+        <section className="relative z-40 bg-black text-white py-24 px-6 md:px-20">
+          <motion.div
+            initial={{ opacity: 0, y: 80 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: 'spring', stiffness: 40, damping: 22 }}
+            className="max-w-5xl mx-auto text-center border border-[#222] rounded-3xl py-20 px-10 bg-gradient-to-br from-[#1a002d] via-black to-[#1a002d]"
+          >
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-6">Let’s Build Something Incredible</h2>
+            <p className="text-lg text-gray-300 mb-10">
+              Supercharge your frontend with flexible, powerful, and production-ready components. Build faster, look sharper.
+            </p>
+            <button className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition duration-300">
+              Get Started Now
+            </button>
+          </motion.div>
+        </section>
+      </div>
     </ParallaxProvider>
   );
 }
