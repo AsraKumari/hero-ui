@@ -9,34 +9,35 @@ const Feature = () => {
   return (
     <section
       id="feature"
-      className="relative w-full bg-black text-white py-20 px-4 sm:px-6 overflow-visible"
+      className="relative w-full bg-black text-white py-16 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
-      {/* Background Gradients */}
-      <div className="absolute top-[-80px] left-[-100px] w-[600px] h-[400px] bg-gradient-to-bl from-purple-600 via-pink-500 to-indigo-600 opacity-25 blur-[120px] rounded-full z-0 -rotate-45" />
-      <div className="absolute bottom-[-80px] right-[-100px] w-[600px] h-[400px] bg-gradient-to-tr from-pink-500 via-purple-600 to-indigo-600 opacity-25 blur-[120px] rounded-full z-0 rotate-45" />
+      {/* Responsive Background Gradients */}
+      <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] sm:w-[500px] sm:h-[400px] lg:w-[600px] lg:h-[450px] bg-gradient-to-bl from-purple-600 via-pink-500 to-indigo-600 opacity-25 blur-[100px] sm:blur-[120px] rounded-full z-0 -rotate-45 pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+      <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] sm:w-[500px] sm:h-[400px] lg:w-[600px] lg:h-[450px] bg-gradient-to-tr from-pink-500 via-purple-600 to-indigo-600 opacity-25 blur-[100px] sm:blur-[120px] rounded-full z-0 rotate-45 pointer-events-none" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-12 px-2 sm:px-6"
         >
-          <h2 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight">
             Powerful{" "}
             <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
               Core Features
             </span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">
             Unlock the power of seamless performance, futuristic design, and secure technology that evolves with your needs.
           </p>
         </motion.div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2">
           {features.map((feature, idx) => (
             <div
               key={idx}
@@ -59,11 +60,15 @@ const Feature = () => {
 
               {/* Card Content */}
               <div className="relative z-10 rounded-2xl bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-sm p-6 h-full border border-white/10 hover:border-purple-500/40 transition cursor-pointer">
-                <div className="w-16 h-16 mb-4">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 mb-4">
                   <Lottie animationData={feature.icon} loop={true} />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-400 text-sm">{feature.description}</p>
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-400 text-sm sm:text-base">
+                  {feature.description}
+                </p>
               </div>
             </div>
           ))}
