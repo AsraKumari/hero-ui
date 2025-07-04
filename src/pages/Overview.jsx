@@ -1,5 +1,5 @@
 import { ParallaxProvider } from 'react-scroll-parallax';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 import useIsMobile from '../hooks/useIsMobile';
 
@@ -18,10 +18,15 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   });
 
-  const moonY = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
-  const headingY = useTransform(scrollYProgress, [0, 1], ['0%', '150%']);
-  const mountainsY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-  const cliffsY = useTransform(scrollYProgress, [0, 1], ['0%', '200%']);
+  const rawMoonY = useTransform(scrollYProgress, [0, 1], ['0%', '60%']);
+  const rawMountainsY = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+  const rawCliffsY = useTransform(scrollYProgress, [0, 1], ['0%', '200%']);
+  const rawHeadingY = useTransform(scrollYProgress, [0, 1], ['0%', '150%']);
+
+  const moonY = useSpring(rawMoonY, { stiffness: 40, damping: 20 });
+  const mountainsY = useSpring(rawMountainsY, { stiffness: 50, damping: 24 });
+  const cliffsY = useSpring(rawCliffsY, { stiffness: 60, damping: 26 });
+  const headingY = useSpring(rawHeadingY, { stiffness: 40, damping: 20 });
 
   return (
     <ParallaxProvider>
@@ -30,7 +35,7 @@ export default function HeroSection() {
           <section className="relative h-screen w-full overflow-hidden bg-black text-white">
             <motion.div
               initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.05, 1] }}
+              animate={{ scale: [1, 1.30, 1] }}
               transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute inset-0 overflow-hidden z-0"
             >
@@ -38,16 +43,17 @@ export default function HeroSection() {
                 src={stars}
                 alt="Stars"
                 className="w-full h-full object-cover object-top"
-                style={{ maskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)' }}
+                style={{
+                  maskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)',
+                  WebkitMaskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)',
+                }}
               />
             </motion.div>
 
             <motion.img
               src={moon}
               alt="Moon"
-              initial={{ y: -10 }}
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+              style={{ y: moonY }}
               className="absolute top-[6%] left-1/2 -translate-x-1/2 w-24 sm:w-28 md:w-32 z-20 object-contain"
             />
 
@@ -66,18 +72,14 @@ export default function HeroSection() {
             <motion.img
               src={mountains}
               alt="Mountains"
-              initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ y: mountainsY }}
               className="absolute bottom-0 w-full h-[100vh] object-cover z-10"
             />
 
             <motion.img
               src={frontCliff}
               alt="Cliff"
-              initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.03, 1] }}
-              transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ y: cliffsY }}
               className="absolute bottom-0 w-full h-[100vh] object-cover z-20"
             />
           </section>
@@ -90,7 +92,7 @@ export default function HeroSection() {
               src={stars}
               alt="Stars"
               initial={{ scale: 1 }}
-              animate={{ scale: [1, 1.05, 1] }}
+              animate={{ scale: [1, 1.30, 1] }}
               transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute inset-0 w-full h-full object-cover z-0"
             />
@@ -99,13 +101,11 @@ export default function HeroSection() {
               src={moon}
               alt="Moon"
               style={{ y: moonY }}
-              transition={{ type: 'spring', stiffness: 40, damping: 20 }}
               className="absolute top-[6%] left-1/2 -translate-x-1/2 w-32 lg:w-40 z-10 object-contain"
             />
 
             <motion.div
               style={{ y: headingY }}
-              transition={{ type: 'spring', stiffness: 40, damping: 20 }}
               className="absolute top-40 left-[28%] -translate-x-1/2 w-full max-w-[600px] text-center px-6 z-20"
             >
               <motion.h1
@@ -125,7 +125,6 @@ export default function HeroSection() {
               src={mountains}
               alt="Mountains"
               style={{ y: mountainsY }}
-              transition={{ type: 'spring', stiffness: 50, damping: 25 }}
               className="absolute bottom-[-150px] left-[20%] -translate-x-1/2 w-full max-w-7xl z-20"
             />
 
@@ -133,13 +132,12 @@ export default function HeroSection() {
               src={frontCliff}
               alt="Cliffs"
               style={{ y: cliffsY }}
-              transition={{ type: 'spring', stiffness: 60, damping: 28 }}
               className="absolute bottom-[-10%] left-[0%] -translate-x-1/2 w-full max-w-8xl z-30"
             />
           </section>
         )}
 
-        {/* Use Case Section */}
+        {/* 🟣 Use Case Section */}
         <section className="relative z-50 w-full bg-gradient-to-b from-black via-[#120022] to-black pt-20 pb-24 px-6 md:px-16 text-white">
           <div className="max-w-6xl mx-auto text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
@@ -290,7 +288,7 @@ export default function HeroSection() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* CTA Section */}
         <section className="relative z-40 bg-black text-white py-24 px-6 md:px-20">
           <motion.div
             initial={{ opacity: 0, y: 80 }}
