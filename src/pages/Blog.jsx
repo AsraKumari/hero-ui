@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Code, Paintbrush, BarChart, PenTool, Users, Briefcase, Plus } from 'lucide-react';
 
 // Import your local images from src/assets
-import heroImage from '../assets/card1.avif';
-import revolutionImage from '../assets/card1.avif';
+import heroImage from '../assets/meet.jpg';
+import revolutionImage from '../assets/card.jpg';
 import storytellingImage from '../assets/creative.jpg';
 import dataImage from '../assets/discussion.jpg';
 import designSystemImage from '../assets/type.jpg';
