@@ -3,7 +3,7 @@ import { ArrowRight, Code, Paintbrush, BarChart, PenTool, Users, Briefcase, Plus
 
 // Import your local images from src/assets
 import heroImage from '../assets/Card1.AVIF';
-import revolutionImage from '../assets/Card1.AVIF';
+import revolutionImage from '../assets/card1.AVIF';
 import storytellingImage from '../assets/creative.jpg';
 import dataImage from '../assets/discussion.jpg';
 import designSystemImage from '../assets/type.jpg';
