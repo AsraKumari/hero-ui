@@ -35,5 +35,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  // ✅ I've added the required typography plugin here
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };

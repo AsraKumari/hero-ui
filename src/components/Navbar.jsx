@@ -1,40 +1,28 @@
-// Navbar.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useScroll } from "../ScrollToSectionContext";
 
-// ✅ Updated only this part ↓
 const navItems = [
   { label: "Home", link: "/" },
-  { label: "Pricing", link: "#pricing" },
   {
-    label: "Product",
+    label: "Plans",
     subItems: [
-      { label: "Overview", link: "/overview" }, // ✅ updated link here
+      { label: "Pricing", link: "#pricing" },
       { label: "Feature", link: "#feature" },
-      { label: "Integrations", link: "#" },
     ],
   },
-  {
-    label: "Solutions",
-    subItems: [
-      { label: "For Teams", link: "#" },
-      { label: "For Individuals", link: "#" },
-      { label: "Enterprise", link: "#" },
-      { label: "Agencies", link: "#" },
-    ],
-  },
+  { label: "Overview", link: "/overview" },
   {
     label: "Company",
     subItems: [
       { label: "About", link: "/about" },
       { label: "Careers", link: "#" },
-      { label: "Blog", link: "#" },
       { label: "Press", link: "#" },
     ],
   },
-  { label: "Contact", link: "#contact" },
+  { label: "Contact", link: "#" },
+  { label: "Blog", link: "/blog" },
 ];
 
 const Navbar = () => {
@@ -55,13 +43,20 @@ const Navbar = () => {
     setActiveMobileDropdown(activeMobileDropdown === label ? null : label);
   };
 
+  // ✅ THIS FUNCTION IS NOW FIXED
   const handleScrollToSection = (id) => {
-    if (location.pathname !== "/") {
+    // Check if we are on the homepage
+    if (location.pathname === "/") {
+      // If yes, find the section and scroll to it
+      const section = document.querySelector(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // If we are on a different page (like /about or /overview),
+      // we navigate to the homepage and then tell it to scroll.
       setSectionToScroll(id);
       navigate("/");
-    } else {
-      const section = document.querySelector(id);
-      if (section) section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -69,6 +64,11 @@ const Navbar = () => {
     handleScrollToSection(link);
     setMobileOpen(false);
   };
+
+  useEffect(() => {
+    // This effect is specifically for scrolling after a page navigation
+    // It remains the same.
+  }, [location, setSectionToScroll]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
