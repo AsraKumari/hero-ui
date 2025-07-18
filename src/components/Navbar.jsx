@@ -91,7 +91,7 @@ const Navbar = () => {
     >
       <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <div className="text-2xl font-bold tracking-wide text-white whitespace-nowrap">
-          Asra<span className="text-purple-600">UI</span>
+          Hexora<span className="text-purple-600">UI</span>
         </div>
 
         {/* Desktop Menu */}
