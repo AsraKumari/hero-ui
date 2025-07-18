@@ -1,8 +1,8 @@
-# 🚀 Hero UI – Core Features Section (WIP)
+# 🚀 Hexora UI – Core Features Section (WIP)
 
-**Hero UI** is a modern, responsive, and animated **feature showcase section** built using **React**, **Tailwind CSS**, **Framer Motion**, and **Lottie**. It is part of a larger landing page design project intended to demonstrate polished frontend UI/UX skills.
+**Hexora UI** is a modern, responsive, and animated **feature showcase section** built using **React**, **Tailwind CSS**, **Framer Motion**, and **Lottie** , **Parallex Effect**. It is part of a larger landing page design project intended to demonstrate polished frontend UI/UX skills.
 
-🔗 **Live Preview**: [Click to View](https://asrakumari.github.io/hero-ui/)  
+
 🛠️ **Status**: _Work in Progress_ (actively improving responsiveness, animations, and design refinements)
 
 ---
