@@ -10,7 +10,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://asrakumari.github.io/hero-ui",
+  "homepage": "https://asrakumari.github.io/hexora-ui/",
   "dependencies": {
     "@babel/runtime": "^7.27.6",
     "clsx": "^2.1.1",

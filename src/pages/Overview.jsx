@@ -194,7 +194,7 @@ const smoothX = useSpring(x, { stiffness: 40, damping: 15 });
       className="mb-20 text-center"
     >
       <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-        Where Can You Use Hero UI?
+        Where Can You Use Hexora UI?
       </h2>
       <p className="text-gray-400 max-w-xl mx-auto">
         From internal dashboards to public landing pages — build fast and beautifully.
