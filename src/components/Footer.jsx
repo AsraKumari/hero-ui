@@ -30,7 +30,7 @@ const Footer = () => {
         {/* Brand + Newsletter */}
         <div className="space-y-5">
           <h3 className="text-3xl font-extrabold tracking-wide">
-            Asra<span className="text-purple-400">UI</span>
+            Hexora<span className="text-purple-400">UI</span>
           </h3>
           <p className="text-gray-400 text-sm leading-relaxed">
             Empowering modern developers with beautifully crafted UI and seamless experiences.
